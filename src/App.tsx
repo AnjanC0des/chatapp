@@ -41,7 +41,7 @@ export default function App() {
   return (
     <>
       <div className="bg-blue-500 text-white p-4">Hello, Tailwind!</div>
-      <Card className="border-2 border-white rounded-sm">
+      <Card className="dark border border-slate-600 rounded-md p-2">
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
             <FormField
