@@ -72,7 +72,7 @@ export default function App() {
                 <FormItem>
                   <FormLabel>Password</FormLabel>
                   <FormControl>
-                    <Input placeholder="" {...field} />
+                    <Input type="password" placeholder="" {...field} />
                   </FormControl>
                   <FormDescription>This is your password.</FormDescription>
                   <FormMessage />
