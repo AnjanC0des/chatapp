@@ -9,12 +9,12 @@ import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import Googlelogo from "./assets/googlelogo.svg"
 import { Input } from "@/components/ui/input";
 
 const formSchema = z.object({
@@ -23,8 +23,8 @@ const formSchema = z.object({
   }),
   password: z
     .string()
-    .min(5, { message: "The password must be atleast 5 characters long." })
-    .max(10, { message: "The password can be atleast 10 characters long." }),
+    .min(5, { message: "Password is too short." })
+    .max(10, { message: "Password is too long." }),
 });
 
 export default function App() {
@@ -45,8 +45,11 @@ export default function App() {
 
   return (
     <>
-      <div className="bg-blue-500 text-white p-4">Hello, Tailwind!</div>
-      <Card className="dark border border-slate-600 rounded-md p-2">
+      <Card className="dark border border-slate-600 rounded-md p-2 space-y-2">
+      <div className="bg-blue-500 rounded-md text-white p-4">Login</div>
+      <button className="flex border border-blue-500 justify-center content-center rounded-md p-4 w-full">
+      <img src="src/assets/googlelogo.svg" width="25" height="25"/>
+      </button>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
             <FormField
@@ -58,9 +61,6 @@ export default function App() {
                   <FormControl>
                     <Input placeholder="shadcn" {...field} />
                   </FormControl>
-                  <FormDescription>
-                    This is your public display name.
-                  </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
@@ -72,9 +72,8 @@ export default function App() {
                 <FormItem>
                   <FormLabel>Password</FormLabel>
                   <FormControl>
-                    <Input placeholder="" {...field} />
+                    <Input type="password" placeholder="" {...field} />
                   </FormControl>
-                  <FormDescription>This is your password.</FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
