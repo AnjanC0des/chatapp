@@ -14,8 +14,10 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import Googlelogo from "./assets/googlelogo.svg"
+import { GoogleOAuthProvider } from "@react-oauth/google";
+import Login from "./Login";
 import { Input } from "@/components/ui/input";
+import Logout from "./Logout";
 
 const formSchema = z.object({
   username: z.string().email({
@@ -45,43 +47,44 @@ export default function App() {
 
   return (
     <>
-      <Card className="dark border border-slate-600 rounded-md p-2 space-y-2">
-      <div className="bg-blue-500 rounded-md text-white p-4">Login</div>
-      <button className="flex border border-blue-500 justify-center content-center rounded-md p-4 w-full">
-      <img src="src/assets/googlelogo.svg" width="25" height="25"/>
-      </button>
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-            <FormField
-              control={form.control}
-              name="username"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Username</FormLabel>
-                  <FormControl>
-                    <Input placeholder="shadcn" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="password"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Password</FormLabel>
-                  <FormControl>
-                    <Input type="password" placeholder="" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <Button type="submit">Submit</Button>
-          </form>
-        </Form>
-      </Card>
+      <GoogleOAuthProvider clientId="672824299793-g1pnvv0r4l4jcmcsq81s6ktndd13e076.apps.googleusercontent.com">
+        <Card className="dark border border-slate-600 rounded-md p-2 space-y-2">
+          <div className="bg-blue-500 rounded-md text-white p-4">Login</div>
+          {/* <Login />
+          <Logout /> */}
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+              <FormField
+                control={form.control}
+                name="username"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Username</FormLabel>
+                    <FormControl>
+                      <Input placeholder="shadcn" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="password"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Password</FormLabel>
+                    <FormControl>
+                      <Input type="password" placeholder="" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <Button type="submit">Submit</Button>
+            </form>
+          </Form>
+        </Card>
+      </GoogleOAuthProvider>
     </>
   );
 }
