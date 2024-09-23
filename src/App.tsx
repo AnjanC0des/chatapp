@@ -18,6 +18,7 @@ import { GoogleOAuthProvider } from "@react-oauth/google";
 import Login from "./Login";
 import { Input } from "@/components/ui/input";
 import Logout from "./Logout";
+import { useSelector } from "react-redux";
 
 const formSchema = z.object({
   username: z.string().email({
@@ -30,6 +31,8 @@ const formSchema = z.object({
 });
 
 export default function App() {
+  const loginState = useSelector((state) => state.login.details);
+  console.log("Login state", loginState);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -44,14 +47,14 @@ export default function App() {
     // ✅ This will be type-safe and validated.
     console.log(values);
   }
-
+  let content = loginState === null ? <p>Login</p> : <p>{loginState.name}</p>;
   return (
     <>
       <GoogleOAuthProvider clientId="672824299793-g1pnvv0r4l4jcmcsq81s6ktndd13e076.apps.googleusercontent.com">
         <Card className="dark border border-slate-600 rounded-md p-2 space-y-2">
-          <div className="bg-blue-500 rounded-md text-white p-4">Login</div>
-          {/* <Login />
-          <Logout /> */}
+          <div className="bg-blue-500 rounded-md text-white p-4">{content}</div>
+          <Login />
+          <Logout />
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
               <FormField
