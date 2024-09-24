@@ -6,7 +6,7 @@ export default ({ name, delfunc, id }) => {
         {name}
       </div>
       <div className="justify-self-end text-white" onClick={() => delfunc(id)}>
-        {/* <Del /> */}
+        <img src="src/assets/delicon.svg" width="25" height="25" />
         Delete
       </div>
     </>

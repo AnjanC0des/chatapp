@@ -8,10 +8,12 @@ export default ({ recipients }) => {
       {recipients.map((obj) => {
         return (
           <>
-            <Avatar>
-              <AvatarFallback>{obj.avatar}</AvatarFallback>
-            </Avatar>
-            <Card>{obj.name}</Card>;
+            <div className="flex flex-nowrap p-2">
+              <Avatar>
+                <AvatarFallback>{obj.avatar}</AvatarFallback>
+              </Avatar>
+              <Card className="w-fit">{obj.name}</Card>
+            </div>
           </>
         );
       })}

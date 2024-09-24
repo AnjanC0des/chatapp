@@ -7,7 +7,7 @@ export default () => {
   ];
   return (
     <>
-      <div className="border-2 border-white grid grid-cols-3">
+      <div className="w-screen h-screen border-2 border-white grid grid-cols-4">
         <div className="col-span-1">
           <Recipients recipients={recipients} />
         </div>
