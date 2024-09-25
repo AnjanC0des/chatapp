@@ -1,14 +1,13 @@
 // import Del from "../assets/delicon.svg";
 export default ({ name, delfunc, id }) => {
   return (
-    <>
-      <div className="font-mono text-xl font-medium text-left text-white justify-self-start">
+    <div className="flex justify-between">
+      <div className="font-mono text-xl font-medium text-left text-black ">
         {name}
       </div>
-      <div className="justify-self-end text-white" onClick={() => delfunc(id)}>
-        <img src="src/assets/delicon.svg" width="25" height="25" />
-        Delete
+      <div className="text-black" onClick={() => delfunc(id)}>
+        <img src="src/assets/delicon.svg" width="20" height="20" />
       </div>
-    </>
+    </div>
   );
 };

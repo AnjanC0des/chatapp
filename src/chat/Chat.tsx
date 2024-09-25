@@ -11,7 +11,7 @@ export default () => {
         <div className="col-span-1">
           <Recipients recipients={recipients} />
         </div>
-        <div className="col-span-2">
+        <div className="flex flex-col col-span-3">
           <ChatWindow />
         </div>
       </div>

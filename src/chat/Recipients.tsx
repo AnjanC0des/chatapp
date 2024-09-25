@@ -8,7 +8,7 @@ export default ({ recipients }) => {
       {recipients.map((obj) => {
         return (
           <>
-            <div className="flex flex-nowrap p-2">
+            <div className="flex p-2 gap-1">
               <Avatar>
                 <AvatarFallback>{obj.avatar}</AvatarFallback>
               </Avatar>

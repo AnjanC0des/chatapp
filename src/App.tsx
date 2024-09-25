@@ -91,7 +91,9 @@ export default function App() {
     //   </GoogleOAuthProvider>
     // </>
     <>
-      <Chat />
+      <div className="bg-white">
+        <Chat />
+      </div>
     </>
   );
 }
