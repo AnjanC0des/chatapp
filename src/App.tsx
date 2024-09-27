@@ -1,5 +1,9 @@
 "use client";
 //Test push
+import { useEffect } from "react";
+import { UseDispatch, useDispatch } from "react-redux";
+import { recipientList, messages } from "./State";
+import { RecipientListActions } from "./store/RecipientSlice";
 import "./App.css";
 // import { zodResolver } from "@hookform/resolvers/zod";
 // import { useForm } from "react-hook-form";
@@ -32,6 +36,12 @@ import { useSelector } from "react-redux";
 // });
 
 export default function App() {
+  const dispatch = useDispatch();
+  const { setRecipients } = RecipientListActions;
+  useEffect(() => {
+    dispatch(setRecipients(recipientList));
+  }, []);
+
   // const loginState = useSelector((state) => state.login.details);
   // console.log("Login state", loginState);
   // const form = useForm<z.infer<typeof formSchema>>({
@@ -49,6 +59,7 @@ export default function App() {
   //   console.log(values);
   // }
   // let content = loginState === null ? <p>Login</p> : <p>{loginState.name}</p>;
+
   return (
     // <>
     //   <GoogleOAuthProvider clientId="672824299793-g1pnvv0r4l4jcmcsq81s6ktndd13e076.apps.googleusercontent.com">
