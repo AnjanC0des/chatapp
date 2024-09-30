@@ -12,7 +12,7 @@ export const messages = {
   "2": [
     {
       id: "101",
-      sender: "1",
+      sender: "2",
       content: "Hi! How are you!",
     },
     {
@@ -22,7 +22,7 @@ export const messages = {
     },
     {
       id: "103",
-      sender: "1",
+      sender: "2",
       content: "Im doing good!",
     },
   ],

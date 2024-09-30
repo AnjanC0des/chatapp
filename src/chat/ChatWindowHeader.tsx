@@ -5,7 +5,7 @@ export default ({ name, delfunc, id }) => {
   const recipientList = useSelector((state) => state.recipients);
   return (
     <div className="flex justify-between">
-      <div className="font-mono text-xl font-medium text-left text-black ">
+      <div className="font-mono text-xl font-medium text-left text-black pb-4">
         {active !== null ? recipientList[active].name : "Dummy name"}
       </div>
       <div className="text-black" onClick={() => delfunc(id)}>
