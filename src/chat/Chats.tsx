@@ -1,10 +1,21 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { Textarea } from "@/components/ui/textarea";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { recipientList } from "@/State";
+import { DraftActions } from "@/store/DraftSlice";
 export default (props) => {
+  const { setDraft, clearDraft } = DraftActions;
+  const dispatch = useDispatch();
   const messages = useSelector((state) => state.message.messages);
+  const draft = useSelector((state) => state.draft);
   const active = useSelector((state) => state.active);
+  let draftmessage =
+    active == null || draft[active] == null ? "" : draft[active];
   const initials = active !== null ? recipientList[active].initials : null;
+
+  const draftUpdate = (e) => {
+    dispatch(setDraft({ [active]: e.target.value }));
+  };
   return (
     <>
       <div className="flex-grow overflow-y-auto">
@@ -22,6 +33,13 @@ export default (props) => {
             );
           })}
       </div>
+      {active !== null && (
+        <Textarea
+          value={draftmessage}
+          onChange={draftUpdate}
+          placeholder="Type message."
+        />
+      )}
     </>
   );
 };

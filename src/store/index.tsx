@@ -2,6 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import LoginReducer from "./LoginSlice";
 import UserReducer from "./UserSlice";
 import MessageReducer from "./MessageSlice";
+import DraftReducer from "./DraftSlice";
 import { ActiveRecipientReducer, RecipientListReducer } from "./RecipientSlice";
 const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ const store = configureStore({
     message: MessageReducer,
     active: ActiveRecipientReducer,
     recipients: RecipientListReducer,
+    draft: DraftReducer,
   },
 });
 
