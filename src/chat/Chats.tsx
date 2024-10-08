@@ -3,8 +3,10 @@ import { Textarea } from "@/components/ui/textarea";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { recipientList } from "@/State";
 import { DraftActions } from "@/store/DraftSlice";
+import { MessageActions } from "@/store/MessageSlice";
 export default (props) => {
   const { setDraft, clearDraft } = DraftActions;
+  const { setMessages, addMessages, clearMessages } = MessageActions;
   const dispatch = useDispatch();
   const messages = useSelector((state) => state.message.messages);
   const draft = useSelector((state) => state.draft);
@@ -15,6 +17,14 @@ export default (props) => {
 
   const draftUpdate = (e) => {
     dispatch(setDraft({ [active]: e.target.value }));
+  };
+  const sendMessage = (e) => {
+    if (e.key === "Enter") {
+      dispatch(
+        addMessages({ id: "105", sender: "0", content: e.target.value })
+      );
+      dispatch(clearDraft(active));
+    }
   };
   return (
     <>
@@ -37,6 +47,7 @@ export default (props) => {
         <Textarea
           value={draftmessage}
           onChange={draftUpdate}
+          onKeyDown={sendMessage}
           placeholder="Type message."
         />
       )}

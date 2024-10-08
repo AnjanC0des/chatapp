@@ -20,7 +20,7 @@ const MessageSlice = createSlice({
     },
     addMessages(state, action) {
       let newMessages = action.payload;
-      state.messages.push(...newMessages);
+      state.messages.push(newMessages);
     },
     clearMessages(state) {
       state.messages = [];
