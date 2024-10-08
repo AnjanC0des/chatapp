@@ -10,17 +10,20 @@ import { useEffect } from "react";
 export default () => {
   const { setActiveRecipient } = ActiveRecipientActions;
   const { setMessages } = MessageActions;
-  let loadedmessages = { ...messages };
+  const messageState = useSelector((state) => state.message);
+  const loadedmessages = useSelector((state) => state.message.allMessages);
+  console.log(loadedmessages);
+  const active = useSelector((state) => state.active);
   const dispatch = useDispatch();
   const recipients = useSelector((state: any) => state.recipients);
   const clickHandler = (key: string) => {
     dispatch(setActiveRecipient(key));
-    dispatch(setMessages(loadedmessages[key]));
+    dispatch(setMessages(messageState.allMessages[key]));
   };
-  const statemessages = useSelector((state) => state.messages);
   useEffect(() => {
-    loadedmessages = { ...statemessages };
-  }, [statemessages]);
+    if (active !== null)
+      dispatch(setMessages(messageState.allMessages[active]));
+  }, [messageState.allMessages, active]);
   return (
     <>
       {Object.keys(recipients).map((key: string) => {

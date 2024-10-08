@@ -21,7 +21,10 @@ export default (props) => {
   const sendMessage = (e) => {
     if (e.key === "Enter") {
       dispatch(
-        addMessages({ id: "105", sender: "0", content: e.target.value })
+        addMessages({
+          active: active,
+          messageobj: { id: "105", sender: "0", content: e.target.value },
+        })
       );
       dispatch(clearDraft(active));
     }
