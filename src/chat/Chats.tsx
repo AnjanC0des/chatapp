@@ -20,13 +20,16 @@ export default (props) => {
   };
   const sendMessage = (e) => {
     if (e.key === "Enter") {
-      dispatch(
-        addMessages({
-          active: active,
-          messageobj: { id: "105", sender: "0", content: e.target.value },
-        })
-      );
-      dispatch(clearDraft(active));
+      e.preventDefault();
+      if (e.target.value.length > 0) {
+        dispatch(
+          addMessages({
+            active: active,
+            messageobj: { id: "105", sender: "0", content: e.target.value },
+          })
+        );
+        dispatch(clearDraft(active));
+      }
     }
   };
   return (
