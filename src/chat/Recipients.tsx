@@ -23,7 +23,7 @@ export default () => {
   useEffect(() => {
     if (active !== null)
       dispatch(setMessages(messageState.allMessages[active]));
-  }, [messageState.allMessages, active]);
+  }, [messageState.allMessages[active], active]);
   return (
     <>
       {Object.keys(recipients).map((key: string) => {
