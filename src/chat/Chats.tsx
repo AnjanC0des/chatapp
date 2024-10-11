@@ -4,9 +4,10 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { recipientList } from "@/State";
 import { DraftActions } from "@/store/DraftSlice";
 import { MessageActions } from "@/store/MessageSlice";
-export default (props) => {
+import { useEffect } from "react";
+export default ({ socket }) => {
   const { setDraft, clearDraft } = DraftActions;
-  const { setMessages, addMessages, clearMessages } = MessageActions;
+  const { addMessages } = MessageActions;
   const dispatch = useDispatch();
   const messages = useSelector((state) => state.message.messages);
   const draft = useSelector((state) => state.draft);
@@ -18,16 +19,25 @@ export default (props) => {
   const draftUpdate = (e) => {
     dispatch(setDraft({ [active]: e.target.value }));
   };
+
+  useEffect(() => {
+    socket.on("new_message", (message) => {
+      dispatch(addMessages(message));
+    });
+    return () => {
+      socket.off("new_message");
+    };
+  }, []);
+
   const sendMessage = (e) => {
     if (e.key === "Enter") {
       e.preventDefault();
       if (e.target.value.length > 0) {
-        dispatch(
-          addMessages({
-            active: active,
-            messageobj: { id: "105", sender: "0", content: e.target.value },
-          })
-        );
+        socket.emit("send_message", {
+          id: "808",
+          sender: active,
+          content: e.target.value,
+        });
         dispatch(clearDraft(active));
       }
     }

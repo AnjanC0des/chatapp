@@ -1,10 +1,10 @@
 import ChatWindowHeader from "./ChatWindowHeader";
 import Chats from "./Chats";
-export default () => {
+export default (props) => {
   return (
     <>
       <ChatWindowHeader name={"Dummy Name"} id={1} delfunc={() => {}} />
-      <Chats />
+      <Chats {...props}/>
     </>
   );
 };

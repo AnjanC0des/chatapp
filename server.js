@@ -1,7 +1,7 @@
 import express from "express";
 import { createServer } from "http";
 import { Server } from "socket.io";
-import { messages } from "./ServerState";
+import { recipientList, messages } from "./ServerState";
 const app = express();
 const httpServer = createServer(app);
 const allchats = { ...messages };
@@ -13,6 +13,10 @@ const io = new Server(httpServer, {
 
 io.on("connection", (socket) => {
   console.log("a user connected");
+
+  socket.on("fetch_recipients", () => {
+    socket.emit("recieve_recipients", recipientList);
+  });
 
   socket.on("fetch_chats", (recipient) => {
     let messages = allchats[recipient];

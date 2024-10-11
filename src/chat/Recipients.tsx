@@ -4,26 +4,48 @@ import { messages } from "@/State";
 import { ActiveRecipientActions } from "@/store/RecipientSlice";
 import { MessageActions } from "@/store/MessageSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 // Add avatar images later.
 // import { AvatarImage } from "@/com ponents/ui/avatar";
-export default () => {
+export default ({ socket }) => {
   const { setActiveRecipient } = ActiveRecipientActions;
+  const [rlfetch, setrlfetch] = useState(true);
   const { setMessages } = MessageActions;
-  const messageState = useSelector((state) => state.message);
   const loadedmessages = useSelector((state) => state.message.allMessages);
   console.log(loadedmessages);
   const active = useSelector((state) => state.active);
   const dispatch = useDispatch();
-  const recipients = useSelector((state: any) => state.recipients);
+  let recipients = [];
   const clickHandler = (key: string) => {
     dispatch(setActiveRecipient(key));
-    dispatch(setMessages(messageState.allMessages[key]));
   };
+
   useEffect(() => {
-    if (active !== null)
-      dispatch(setMessages(messageState.allMessages[active]));
-  }, [messageState.allMessages[active], active]);
+    if (rlfetch) {
+      socket.emit("fetch_recipients");
+    }
+  }, []);
+
+  useEffect(() => {
+    socket.on("recieve_recipients", (rl) => {
+      recipients = rl;
+      setrlfetch(false);
+    });
+  }, []);
+
+  useEffect(() => {
+    if (active !== null) socket.emit("fetch_chats", active);
+  }, [active]);
+
+  useEffect(() => {
+    socket.on("receive_chats", (messages) => {
+      dispatch(setMessages(messages));
+    });
+    return () => {
+      socket.off("recieve_chats");
+    };
+  }, []);
+
   return (
     <>
       {Object.keys(recipients).map((key: string) => {
