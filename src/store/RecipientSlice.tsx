@@ -16,7 +16,7 @@ const ActiveRecipient = createSlice({
 
 const RecipientList = createSlice({
   name: "recipients",
-  initialState: {},
+  initialState: [],
   reducers: {
     setRecipients(_, action) {
       return action.payload;

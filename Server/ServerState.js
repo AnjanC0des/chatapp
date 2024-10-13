@@ -1,16 +1,4 @@
 export const recipientList = {
-  "5": {
-    name: "Sage",
-    initials: "S",
-  },
-  "4": {
-    name: "John Constantine",
-    initials: "JC",
-  },
-  "3": {
-    name: "Chaos demon",
-    initials: "CD",
-  },
   "2": {
     name: "Sauron Dash",
     initials: "SD",
