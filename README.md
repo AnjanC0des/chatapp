@@ -1,3 +1,5 @@
+Its a ui for a messaging app I'm working on but its still in a prototype stage with dummy functionality and no styling.
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
